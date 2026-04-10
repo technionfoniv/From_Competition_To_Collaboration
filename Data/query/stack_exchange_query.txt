@@ -1,0 +1,33 @@
+sql_query_stack_exchange:
+SELECT   
+    p.Id,  
+    p.Body,  
+    p.Title,  
+    p.CreationDate,  
+    p.Tags,  
+    vs.up,  
+    vs.down,  
+    p.Score,  
+    p.ViewCount,  
+    p.AnswerCount,  
+    p.AcceptedAnswerId,  
+    p.ClosedDate
+FROM ( 
+    -- Compute vote statistics directly without a temporary table 
+    SELECT  
+        v.PostId,  
+        SUM(CASE WHEN v.VoteTypeId = 2 THEN 1 ELSE 0 END) AS up,  
+        SUM(CASE WHEN v.VoteTypeId = 3 THEN 1 ELSE 0 END) AS down  
+    FROM Votes v   
+    GROUP BY v.PostId 
+) vs  
+INNER JOIN Posts p ON vs.PostId = p.Id  
+INNER JOIN Users u ON p.OwnerUserId = u.Id  
+WHERE   
+  AND p.CommunityOwnedDate IS NULL   
+  AND p.CreationDate >= 'DATE_START'   
+  AND p.CreationDate < 'DATE_END'   
+  AND p.Title IS NOT NULL AND p.Title <> ''  
+ORDER BY vs.up DESC;  
+ 
+SET NOCOUNT OFF;
