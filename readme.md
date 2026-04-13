@@ -46,10 +46,10 @@ Run `research_classifier.ipynb`.
 Navigate to the `partial_collaboration_Bootstrap` directory and run the bootstrapping notebook to prepare the dataset for the strategy simulations:
 Run `Create_Bootstrap_Dataset.ipynb`.
 
-### 5\. Execute Strategies (Asymetric Collaboration)
+### 5\. Execute Strategies (Asymetric Information)
 
 Once the bootstrapped dataset is generated, you can evaluate individual strategies. From your command line, run the desired strategy script:
-
+Do it inside the partial_collaboration_Bootstrap diredtory
 ```bash
 python [strategy].py
 ```
@@ -60,7 +60,7 @@ python [strategy].py
 
 To evaluate the heuristics:
 
-1.  Copy your newly generated bootstrapped dataset into the `full collaboration` directory.
+1.  Copy your newly generated bootstrapped dataset into the `full_collaboration_bootstrap` directory.
 2.  Run the full collaboration script from the command line:
 
 <!-- end list -->
